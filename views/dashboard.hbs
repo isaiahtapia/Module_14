@@ -1,0 +1,92 @@
+<h1 class="title is-4 ml-6 pl-4">Your Blog Posts</h1>
+
+<section class="student-wrap fixed-grid has-3-cols has-2-cols-mobile mx-6">
+    {{#if blogPosts.length}}
+    <div class="grid">
+        {{#each blogPosts}}
+        <div class="cell is-flex is-flex-direction-column">
+            <div class="card">
+                <div class="card-content">
+                    <div class="media">
+                        <div class="media-content">
+                            <h3 class="title is-5">{{title}}</h3>
+                        </div>
+                    </div>
+                    <div class="content">
+                        <p><span class="has-text-weight-bold">Content:</span> {{content}}</p>
+                    </div>
+                </div>
+                <footer class="card-footer">
+                    <div class="card-footer-item is-flex is-justify-content-space-between is-align-items-center"
+                        style="width: 50%;">
+                        <a id="edit-btn" class="button is-link" href="/edit/{{id}}">Edit</a>
+                        <form action="/blogPosts/remove/{{id}}?_method=DELETE" method="POST">
+                            <button id="delete-btn" class="button is-danger" type="submit">Delete</button>
+                        </form>
+                        <div>
+
+                        <p>{{User.username}} - {{formattedDate}}</p>
+                        </div>
+                    </div>
+                    <div class="card-footer-item is-flex is-justify-content-end is-align-items-center"
+                        style="width: 50%;">
+                        <button class="button is-info" onclick="toggleCommentForm('{{id}}')">Comment</button>
+                        <button class="button is-light ml-3" onclick="toggleComments('{{id}}')">View Comments</button>
+                    </div>
+                </footer>
+
+                <div id="comment-form-{{id}}" class="is-hidden mt-3">
+                    <form action="/comments/add/{{id}}" method="POST">
+                        <div class="field">
+                            <label class="label">Add a comment:</label>
+                            <div class="control">
+                                <textarea name="content" class="textarea" placeholder="Write your comment..."></textarea>
+                            </div>
+                        </div>
+                        <div class="control">
+                            <button class="button is-primary" type="submit">Submit</button>
+                        </div>
+                    </form>
+                </div>
+
+                <!-- Comments Section -->
+                <div id="comments-{{id}}" class="is-hidden mt-3">
+                    {{#if Comments.length}}
+                    <div class="box">
+                        <h4 class="title is-6">Comments:</h4>
+                        {{#each Comments}}
+                        <div class="comment mb-2">
+                            <p>{{content}}</p>
+                            <p class="is-size-7 has-text-grey">- {{username}}</p>
+                        </div>
+                        {{/each}}
+                    </div>
+                    {{else}}
+                    <div class="box">
+                        <p>No comments yet.</p>
+                    </div>
+                    {{/if}}
+                </div>
+
+            </div>
+        </div>
+        {{/each}}
+    </div>
+    {{else}}
+    <h3>No Blogs have been added!</h3>
+    {{/if}}
+</section>
+
+<script>
+    function toggleCommentForm(blogPostId) {
+        const form = document.getElementById(`comment-form-${blogPostId}`);
+        form.classList.toggle('is-hidden');
+    }
+
+    function toggleComments(blogPostId) {
+        const comments = document.getElementById(`comments-${blogPostId}`);
+        comments.classList.toggle('is-hidden');
+    }
+
+    
+</script>

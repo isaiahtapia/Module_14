@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{title}}</title>
+    <link rel="stylesheet" href="/css/styles.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@1.0.2/css/bulma.min.css">
+
+    
+</head>
+<body class="has-background-white">
+<header class="columns p-3">
+    <div class="column has-text-centered">
+        <h3 class="title is-3 is-info">TechBlog</h3>
+    </div>
+    <div class="column has-text-centered">
+        <nav class="is-inline-block">
+            {{#if user}}
+            <p class="mr-3">Welcome back, {{user.username}}</p>
+            <a class="mx-5 {{#if add}}is-active{{/if}}" href="/add">Add BlogPost</a>
+            <a href="/logout">Logout</a>
+            {{else}}
+            <a class="mr-3 {{#if login}}is-active{{/if}}" href="/login">Login</a>
+            <span class="mr-2">or</span>
+            <a class="{{#if register}}is-active{{/if}}" href="/register">Register</a>
+            {{/if}}
+        </nav>
+    </div>
+</header>
+
+
+    <main>
+        {{{body}}} 
+    </main>
+</body>
+</html>

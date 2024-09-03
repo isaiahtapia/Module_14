@@ -1,0 +1,25 @@
+<form id="add-blogPost-form" class="m-6 is-flex is-flex-direction-column " action="/blogPosts/add" method="POST">
+    <div class="field">
+        <label class="label">Title: </label>
+        <div class="control">
+            <input name="title" class="input" type="text" placeholder="Enter title">
+        </div>
+    </div>
+
+
+    <div class="field">
+        <label class="label">Enter Blog Post:</label>
+        <div class="control">
+            <textarea name="content" class="textarea" placeholder="type blog here"></textarea>
+        </div>
+    </div>
+
+    <div class="field is-grouped">
+        <div class="control">
+            <button class="button is-link">Submit</button>
+        </div>
+        <div class="control">
+            <a href="/dashboard" class="button is-link is-light">Cancel</a>
+        </div>
+    </div>
+</form>
